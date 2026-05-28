@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Dylana 🌿</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;600&family=Lora:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #fdf6ee;
+      --warm: #f5e6d3;
+      --blush: #e8c4a8;
+      --terracotta: #c9845a;
+      --brown: #7a4f35;
+      --dark: #3d2314;
+      --sage: #9aab8d;
+      --sage-light: #c8d5c0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--dark);
+      font-family: 'Lora', serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.6;
+    }
+
+    .petal {
+      position: fixed;
+      width: 8px; height: 8px;
+      border-radius: 50% 0 50% 0;
+      opacity: 0;
+      animation: drift linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .petal:nth-child(odd)  { background: var(--blush); }
+    .petal:nth-child(even) { background: var(--sage-light); }
+
+    @keyframes drift {
+      0%   { transform: translateY(-40px) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.4; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    header {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 2rem;
+      background: radial-gradient(ellipse 90% 70% at 50% 40%, var(--warm) 0%, var(--cream) 100%);
+    }
+
+    .tag {
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      color: var(--terracotta);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4rem, 14vw, 9rem);
+      font-weight: 700;
+      line-height: 1;
+      color: var(--brown);
+      letter-spacing: -0.02em;
+      margin: 0.3rem 0;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.5s forwards;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--terracotta);
+    }
+
+    .subtitle {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      color: var(--sage);
+      margin-top: 1rem;
+      max-width: 500px;
+      line-height: 1.5;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.9s forwards;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 2s forwards;
+    }
+
+    .scroll-hint span {
+      font-family: 'Caveat', cursive;
+      font-size: 0.9rem;
+      color: var(--blush);
+      letter-spacing: 0.15em;
+    }
+
+    .scroll-hint .arrow {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--blush), transparent);
+      animation: bounce 1.6s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(8px); }
+    }
+
+    main { position: relative; z-index: 1; }
+
+    .section {
+      padding: 7rem 2rem;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .section--alt {
+      background: linear-gradient(135deg, var(--warm) 0%, var(--cream) 100%);
+      max-width: 100%;
+      padding: 7rem 2rem;
+    }
+
+    .section--alt .inner { max-width: 820px; margin: 0 auto; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(201,132,90,0.15);
+      border-radius: 2px;
+      padding: 2rem 1.8rem;
+      position: relative;
+      backdrop-filter: blur(6px);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px) rotate(-0.3deg);
+      box-shadow: 0 12px 40px rgba(122,79,53,0.12);
+    }
+
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 0.6rem;
+    }
+
+    .card p {
+      font-size: 0.93rem;
+      line-height: 1.75;
+      color: #6b4a30;
+    }
+
+    .big-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--brown);
+      border-left: 3px solid var(--terracotta);
+      padding-left: 1.8rem;
+      margin: 3rem 0;
+    }
+
+    .letter {
+      background: #fff9f3;
+      border: 1px solid var(--blush);
+      border-radius: 2px;
+      padding: 3rem 3.5rem;
+      position: relative;
+      box-shadow: 4px 4px 0 var(--blush);
+    }
+
+    .letter::before {
+      content: '✦';
+      position: absolute;
+      top: 1.2rem; right: 1.5rem;
+      color: var(--blush);
+      font-size: 1.2rem;
+    }
+
+    .letter p {
+      font-size: 1.05rem;
+      line-height: 2;
+      color: var(--brown);
+      margin-bottom: 1.2rem;
+    }
+
+    .letter .sign {
+      font-family: 'Caveat', cursive;
+      font-size: 1.6rem;
+      color: var(--terracotta);
+      margin-top: 2rem;
+      display: block;
+    }
+
+    .frases-grid {
+      display: grid;
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+
+    .frase {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.4rem 1.8rem;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.4);
+      border: 1px solid rgba(154,171,141,0.3);
+      transition: background 0.3s;
+    }
+
+    .frase:hover { background: rgba(255,255,255,0.75); }
+
+    .frase .num {
+      font-family: 'Caveat', cursive;
+      font-size: 1.5rem;
+      color: var(--blush);
+      min-width: 2rem;
+      line-height: 1;
+      padding-top: 2px;
+    }
+
+    .frase p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--brown);
+    }
+
+    .section-label {
+      font-family: 'Caveat', cursive;
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--brown);
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title em { font-style: italic; color: var(--terracotta); }
+
+    .divider {
+      width: 48px; height: 2px;
+      background: var(--terracotta);
+      margin: 1.2rem 0 0;
+      border: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--dark);
+      color: var(--blush);
+    }
+
+    footer .footer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-style: italic;
+      color: var(--warm);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    footer p {
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      color: var(--blush);
+      opacity: 0.8;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .letter { padding: 2rem 1.5rem; }
+      .cards  { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      p.style.cssText = `
+        left: ${Math.random() * 100}vw;
+        width: ${5 + Math.random() * 7}px;
+        height: ${5 + Math.random() * 7}px;
+        animation-duration: ${8 + Math.random() * 12}s;
+        animation-delay: ${Math.random() * 10}s;
+      `;
+      document.body.appendChild(p);
+    }
+  </script>
+
+  <header>
+    <span class="tag">Una página para</span>
+    <h1><em>Dylana</em></h1>
+    <p class="subtitle">enojona, sentimental,<br>y la mejor persona que existe.</p>
+    <div class="scroll-hint">
+      <span>sigue leyendo</span>
+      <div class="arrow"></div>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="section reveal">
+      <p class="section-label">Lo que eres</p>
+      <h2 class="section-title">Sí, eres enojona.<br><em>Y eso también te hace tú.</em></h2>
+      <hr class="divider" />
+
+      <blockquote class="big-quote">
+        "Eres de las personas que se enojan fácil, que sienten todo doble
+        y que a veces el mundo las pone de mal humor. Pero también eres
+        de las que más cuidan, de las que más sienten, de las que dejan
+        huella aunque no lo noten."
+      </blockquote>
+
+      <div class="cards">
+        <div class="card">
+          <span class="card-icon">🌿</span>
+          <h3>Tu corazón enorme</h3>
+          <p>Debajo de cada ceño fruncido hay alguien que se preocupa más de lo que dice. Eso no es un defecto, es lo que te hace tan especial.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🍂</span>
+          <h3>Tu honestidad brutal</h3>
+          <p>Nunca finges. Si estás bien, se nota. Si estás mal, también. Y esa autenticidad es algo que muy poca gente tiene.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">☁️</span>
+          <h3>Tu sensibilidad</h3>
+          <p>Sientes las cosas de verdad. Eso duele a veces, sí. Pero también significa que cuando quieres a alguien, lo quieres de verdad.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section--alt">
+      <div class="inner reveal">
+        <p class="section-label">Una carta corta</p>
+        <h2 class="section-title">Gracias por <em>quedarte.</em></h2>
+        <hr class="divider" style="margin-bottom: 2.5rem" />
+
+        <div class="letter">
+          <p>Dylana,</p>
+          <p>
+            Sé que yo no soy lo mejor. A veces fallo, a veces no digo lo que debería,
+            y a veces simplemente no estoy a la altura. Pero tú sigues aquí, y eso
+            significa más de lo que sabes.
+          </p>
+          <p>
+            No te pido que seas perfecta. Me gusta que seas tú: con tu carácter,
+            con tus silencios, con esos momentos en que el mundo entero te pone de
+            malas y aun así encuentras la forma de seguir adelante.
+          </p>
+          <p>
+            Eres la mejor persona que he conocido. No porque seas perfecta,
+            sino porque eres real. Y eso, en este mundo, vale todo.
+          </p>
+          <p>
+            Gracias por seguir a mi lado aunque no siempre me lo merezca.
+            Eso no lo olvido.
+          </p>
+          <span class="sign">Con todo el cariño del mundo 🌿</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section reveal">
+      <p class="section-label">Para cuando lo necesites leer</p>
+      <h2 class="section-title">Cosas que <em>son verdad.</em></h2>
+      <hr class="divider" />
+
+      <div class="frases-grid">
+        <div class="frase">
+          <span class="num">01</span>
+          <p>Eres de esas personas que el mundo necesita más, aunque el mundo no siempre lo sepa.</p>
+        </div>
+        <div class="frase">
+          <span class="num">02</span>
+          <p>Que te enojes no te hace mala persona. Te hace alguien que siente las injusticias y no se queda callada. Eso es valentía.</p>
+        </div>
+        <div class="frase">
+          <span class="num">03</span>
+          <p>Quedarse al lado de alguien cuando podría no hacerlo es uno de los actos más bonitos que existen. Tú lo haces.</p>
+        </div>
+        <div class="frase">
+          <span class="num">04</span>
+          <p>Tu presencia hace los días mejores. Aunque tú no siempre lo notes, yo sí.</p>
+        </div>
+        <div class="frase">
+          <span class="num">05</span>
+          <p>No tienes que ser perfecta para merecer cariño. Ya eres suficiente exactamente como eres.</p>
+        </div>
+        <div class="frase">
+          <span class="num">06</span>
+          <p>Conocerte fue de las mejores cosas que me han pasado. En serio.</p>
+        </div>
+        <div class="frase">
+          <span class="num">07</span>
+          <p>Gracias por ser tan tú. Por no cambiar para encajar. Por seguir ahí aunque las cosas no siempre sean fáciles.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <span class="footer-name">Dylana</span>
+    <p>siempre la mejor persona de la sala 🌿</p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => io.observe(r));
+  </script>
+
+</body>
+</html>
